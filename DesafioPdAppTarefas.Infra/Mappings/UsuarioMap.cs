@@ -22,14 +22,20 @@ namespace DesafioPdAppTarefas.Infra.Mappings
                 .HasColumnName("USUARIO_ID")
                 .IsRequired();
 
+            builder.HasIndex(u => u.Nome)
+                .IsUnique();
+
             builder.Property(u => u.Nome)
-                .HasColumnName("NOME")
+                .HasColumnName("NOME")                
                 .HasMaxLength(100)
                 .IsRequired();
 
-            builder.Property(u => u.Senha)
-                .HasColumnName("SENHA")
-                .HasMaxLength(20)
+            builder.Property(u => u.PasswordHash)
+                .HasColumnName("PASSWORD_HASH")
+                .IsRequired();
+
+            builder.Property(u => u.PasswordSalt)
+                .HasColumnName("PASSWORD_SALT")
                 .IsRequired();
 
             builder.Property(u => u.DataCriacao)

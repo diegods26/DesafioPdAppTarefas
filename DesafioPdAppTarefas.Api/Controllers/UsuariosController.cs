@@ -1,9 +1,12 @@
 ﻿using AutoMapper;
+using DesafioPdAppTarefas.Api.ViewModels;
 using DesafioPdAppTarefas.Aplication.DTOs;
 using DesafioPdAppTarefas.Domain.Interfaces;
 using DesafioPdAppTarefas.Domain.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace DesafioPdAppTarefas.Api.Controllers
 {
@@ -32,6 +35,12 @@ namespace DesafioPdAppTarefas.Api.Controllers
             return Ok(_mapper.Map<UsuarioDTO>(await _usuarioRepository.GetUsuarioById(id)));
         }
 
+        [HttpGet("obter-usurio-por-nome")]
+        public async Task<IActionResult> GetUsuarioByName(string nome)
+        {
+            return Ok(_mapper.Map<UsuarioDTO>(await _usuarioRepository.GetUsuarioByName(nome)));
+        }
+
         [HttpPost]
         public IActionResult PostUsuario([FromBody] UsuarioDTO usuarioDTO)
         {
@@ -50,11 +59,21 @@ namespace DesafioPdAppTarefas.Api.Controllers
         }
 
         [HttpPut]
-        public IActionResult UpdateUsuario([FromBody] UsuarioDTO usuarioDTO)
+        public IActionResult UpdateUsuario([FromBody] UsuarioViewModel model)
         {
-            if (usuarioDTO.Id > 0)
+            if (model.Id > 0)
             {
-                var usuario = _mapper.Map<Usuario>(usuarioDTO);
+                using var hmac = new HMACSHA512();
+                var userDto = new UsuarioDTO
+                {
+                    Id = model.Id,
+                    Nome = model.Nome,
+                    PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(model.Senha)),
+                    PasswordSalt = hmac.Key,
+                    DataAtualizacao = model.DataAtualizacao
+                };
+
+                var usuario = _mapper.Map<Usuario>(userDto);
                 _usuarioRepository.UpdateUsuario(usuario);
             }
             else

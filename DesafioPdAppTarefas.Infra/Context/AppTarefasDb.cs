@@ -1,5 +1,8 @@
 ﻿using DesafioPdAppTarefas.Domain.Models;
+using DesafioPdAppTarefas.Infra.Identity;
 using DesafioPdAppTarefas.Infra.Mappings;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

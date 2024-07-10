@@ -33,6 +33,12 @@ namespace DesafioPdAppTarefas.Infra.Mappings
                 .HasColumnName("STATUS_TAREFA")
                 .IsRequired();
 
+            builder.Property(t => t.DataCriacao)
+                .HasColumnName("DATA_CRIACAO");
+
+            builder.Property(t => t.DataAtualizacao)
+                .HasColumnName("DATA_ATUALIZACAO");
+
             builder.Property(t => t.IdUsuario)
                 .HasColumnName("USUARIO_ID")
                 .IsRequired();

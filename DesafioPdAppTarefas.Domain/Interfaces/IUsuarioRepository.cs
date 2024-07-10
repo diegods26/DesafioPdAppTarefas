@@ -11,6 +11,7 @@ namespace DesafioPdAppTarefas.Domain.Interfaces
     {
         Task<IEnumerable<Usuario>> GetUsuario();
         Task<Usuario> GetUsuarioById(int id);
+        Task<Usuario> GetUsuarioByName(string nome);
         void AddUsuario(Usuario usuario);
         void UpdateUsuario(Usuario usuario);
         void DeleteUsuario(Usuario usuario);

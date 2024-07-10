@@ -31,11 +31,18 @@ namespace DesafioPdAppTarefas.Infra.Repositories
                 .FirstOrDefaultAsync();
         }
 
+        public async Task<Usuario> GetUsuarioByName(string nome)
+        {
+            return await _context.Usuarios
+                .Where(u => u.Nome == nome)
+                .FirstOrDefaultAsync();
+        }
+
         public void AddUsuario(Usuario usuario)
         {
             if (usuario != null)
             {
-                var addUsuario = Usuario.AdicionaUsuario(usuario.Nome, usuario.Senha, usuario.DataCriacao);
+                var addUsuario = Usuario.AdicionaUsuario(usuario.Nome, usuario.PasswordHash, usuario.PasswordSalt, usuario.DataCriacao, usuario.DataAtualizacao);
                 _context.Add(addUsuario);
                 _context.SaveChanges();
             }
@@ -45,8 +52,8 @@ namespace DesafioPdAppTarefas.Infra.Repositories
         {
             if (usuario != null)
             {
-                var addUsuario = Usuario.AtualizaUsuario(usuario.Id, usuario.Nome, usuario.Senha, usuario.DataAtualizacao);
-                _context.Add(addUsuario);
+                var addUsuario = Usuario.AtualizaUsuario(usuario.Id, usuario.Nome, usuario.PasswordHash, usuario.PasswordSalt, usuario.DataCriacao, usuario.DataAtualizacao);
+                _context.Update(addUsuario);
                 _context.SaveChanges();
             }
         }
@@ -55,11 +62,10 @@ namespace DesafioPdAppTarefas.Infra.Repositories
         {
             if (usuario != null)
             {
-                var addUsuario = Usuario.RemoveUsuario(usuario.Id , usuario.Nome, usuario.Senha, usuario.DataAtualizacao);
+                var addUsuario = Usuario.RemoveUsuario(usuario.Id , usuario.Nome, usuario.PasswordHash, usuario.PasswordSalt, usuario.DataAtualizacao);
                 _context.Add(addUsuario);
                 _context.SaveChanges();
             }
         }
-
     }
 }

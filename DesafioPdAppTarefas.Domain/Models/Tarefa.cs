@@ -12,10 +12,16 @@ namespace DesafioPdAppTarefas.Domain.Models
         public string Titulo { get; private set; } = string.Empty;
         public string Descricao { get; private set; } = string.Empty;
         public StatusTarefa Status { get; private set; }
+        public DateTime? DataCriacao { get; private set; }
+        public DateTime? DataAtualizacao { get; private set; }
         public int IdUsuario { get; private set; }
         public virtual Usuario? Usuario { get; private set; }
 
-        public static Tarefa IncluiTarefa(string titulo, string descricao, StatusTarefa status, int idUsuario)
+        public static Tarefa IncluiTarefa(string titulo, 
+                                          string descricao, 
+                                          StatusTarefa status, 
+                                          int idUsuario, 
+                                          DateTime? dataCriacao)
         {
             var tarefa = new Tarefa
             {
@@ -23,13 +29,19 @@ namespace DesafioPdAppTarefas.Domain.Models
                 Titulo = titulo,
                 Descricao = descricao,
                 Status = status,
+                DataCriacao = dataCriacao,
                 IdUsuario = idUsuario
             };
 
             return tarefa;
         }
 
-        public static Tarefa AtualizaTarefa(int id, string titulo, string descricao, StatusTarefa status, int idUsuario)
+        public static Tarefa AtualizaTarefa(int id, 
+                                            string titulo, 
+                                            string descricao, 
+                                            StatusTarefa status, 
+                                            int idUsuario, 
+                                            DateTime? dataAtualizacao)
         {
             var tarefa = new Tarefa
             {
@@ -37,6 +49,7 @@ namespace DesafioPdAppTarefas.Domain.Models
                 Titulo = titulo,
                 Descricao = descricao,
                 Status = status,
+                DataAtualizacao = dataAtualizacao,
                 IdUsuario = idUsuario
             };
 

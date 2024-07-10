@@ -10,45 +10,51 @@ namespace DesafioPdAppTarefas.Domain.Models
     {
         public int Id { get; set; }
         public string Nome { get; private set; } = string.Empty;
-        public string Senha { get; private set; } = string.Empty;
+        public byte[] PasswordHash { get; private set; }
+        public byte[] PasswordSalt { get; private set; }
         public DateTime? DataCriacao { get; private set; }
         public DateTime? DataAtualizacao { get; private set; }
 
         public virtual ICollection<Tarefa>? Tarefas { get; set; }
 
-        public static Usuario AdicionaUsuario(string nome, string senha, DateTime? dataCriacao)
+        public static Usuario AdicionaUsuario(string nome, byte[] passwordHash, byte[] passwordSalt, DateTime? dataCriacao, DateTime? dataAtualizacao)
         {
             var usuario = new Usuario
             {
                 Id = 0,
                 Nome = nome,
-                Senha = senha,
-                DataCriacao = dataCriacao
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                DataCriacao = dataCriacao,
+                DataAtualizacao = dataAtualizacao
             };
 
             return usuario;
         }
 
-        public static Usuario AtualizaUsuario(int id, string nome, string senha, DateTime? dataAtualizacao)
+        public static Usuario AtualizaUsuario(int id, string nome, byte[] passwordHash, byte[] passwordSalt, DateTime? dataCriacao, DateTime? dataAtualizacao)
         {
             var usuario = new Usuario
             {
                 Id = id,
                 Nome = nome,
-                Senha = senha,
-                DataCriacao = dataAtualizacao
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
+                DataCriacao = dataAtualizacao,
+                DataAtualizacao = dataAtualizacao
             };
 
             return usuario;
         }
 
-        public static Usuario RemoveUsuario(int id, string nome, string senha, DateTime? dataAtualizacao)
+        public static Usuario RemoveUsuario(int id, string nome, byte[] passwordHash, byte[] passwordSalt, DateTime? dataAtualizacao)
         {
             var usuario = new Usuario
             {
                 Id = id,
                 Nome = nome,
-                Senha = senha,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt,
                 DataCriacao = dataAtualizacao
             };
 

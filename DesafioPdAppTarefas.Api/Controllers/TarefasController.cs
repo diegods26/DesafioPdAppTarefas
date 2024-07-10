@@ -32,6 +32,12 @@ namespace DesafioPdAppTarefas.Api.Controllers
             return Ok(_mapper.Map<TarefaDTO>(await _tarefaRepository.GetTarefaById(id)));
         }
 
+        [HttpGet("tarefas-por-usuario-id")]
+        public async Task<IActionResult> GetLisOfTarefaByUserId(int id)
+        {
+            return Ok(_mapper.Map<List<TarefaDTO>>(await _tarefaRepository.GetTarefasByUserId(id)));
+        }
+
         [HttpPost]
         public IActionResult PostTarefa([FromBody] TarefaDTO tarefaDTO)
         {

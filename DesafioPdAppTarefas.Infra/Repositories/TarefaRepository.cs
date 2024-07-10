@@ -1,4 +1,5 @@
-﻿using DesafioPdAppTarefas.Domain.Interfaces;
+﻿using DesafioPdAppTarefas.Aplication.DTOs;
+using DesafioPdAppTarefas.Domain.Interfaces;
 using DesafioPdAppTarefas.Domain.Models;
 using DesafioPdAppTarefas.Infra.Context;
 using Microsoft.EntityFrameworkCore;
@@ -47,6 +48,13 @@ namespace DesafioPdAppTarefas.Infra.Repositories
         {
             _context.Remove(tarefa);
             _context.SaveChanges();
+        }
+
+        public async Task<IEnumerable<Tarefa>> GetTarefasByUserId(int userId)
+        {
+
+            return await _context.Tarefas.Where(x => x.IdUsuario == userId)
+                                .OrderBy(x => x.DataCriacao).ToListAsync();
         }
     }
 }

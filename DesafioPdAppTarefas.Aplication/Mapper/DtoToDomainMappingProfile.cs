@@ -15,21 +15,21 @@ namespace DesafioPdAppTarefas.Aplication.Mapper
         {
             #region Usuario
             CreateMap<UsuarioDTO, Usuario>()
-                    .ConstructUsing(vm => Usuario.AdicionaUsuario(vm.Nome, vm.Senha, vm.DataCriacao));
+                    .ConstructUsing(vm => Usuario.AdicionaUsuario(vm.Nome, vm.PasswordHash, vm.PasswordSalt, vm.DataCriacao, vm.DataAtualizacao));
 
             CreateMap<UsuarioDTO, Usuario>()
-                    .ConstructUsing(vm => Usuario.AtualizaUsuario(vm.Id, vm.Nome, vm.Senha, vm.DataAtualizacao));
+                    .ConstructUsing(vm => Usuario.AtualizaUsuario(vm.Id, vm.Nome, vm.PasswordHash, vm.PasswordSalt, vm.DataCriacao, vm.DataAtualizacao));
 
             CreateMap<UsuarioDTO, Usuario>()
-                    .ConstructUsing(vm => Usuario.RemoveUsuario(vm.Id, vm.Nome, vm.Senha, vm.DataAtualizacao));
+                    .ConstructUsing(vm => Usuario.RemoveUsuario(vm.Id, vm.Nome, vm.PasswordHash, vm.PasswordSalt, vm.DataAtualizacao));
             #endregion
 
             #region Tarefas
             CreateMap<TarefaDTO, Tarefa>()
-                .ConstructUsing(vm => Tarefa.IncluiTarefa(vm.Titulo, vm.Descricao, vm.Status, vm.IdUsuario));
+                .ConstructUsing(vm => Tarefa.IncluiTarefa(vm.Titulo, vm.Descricao, vm.Status, vm.IdUsuario, vm.DataCriacao));
 
             CreateMap<TarefaDTO, Tarefa>()
-                .ConstructUsing(vm => Tarefa.AtualizaTarefa(vm.Id, vm.Titulo, vm.Descricao, vm.Status, vm.IdUsuario));
+                .ConstructUsing(vm => Tarefa.AtualizaTarefa(vm.Id, vm.Titulo, vm.Descricao, vm.Status, vm.IdUsuario, vm.DataAtualizacao));
 
             CreateMap<TarefaDTO, Tarefa>()
                 .ConstructUsing(vm => Tarefa.RemoveTarefa(vm.Id, vm.Titulo, vm.Descricao, vm.Status, vm.IdUsuario));

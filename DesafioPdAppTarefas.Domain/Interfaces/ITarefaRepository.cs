@@ -10,6 +10,7 @@ namespace DesafioPdAppTarefas.Domain.Interfaces
     public interface ITarefaRepository
     {
         Task<IEnumerable<Tarefa>> GetTarefas();
+        Task<IEnumerable<Tarefa>> GetTarefasByUserId(int userId);
         Task<Tarefa> GetTarefaById(int id);
         void AddTarefa(Tarefa tarefa);
         void UpdateTarefa(Tarefa tarefa);
